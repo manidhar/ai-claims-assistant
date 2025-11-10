@@ -15,12 +15,12 @@ An AI-powered assistant for processing and assessing boat insurance claims using
    cd ai-claims-assistant
    ```
 
-2. **Create and activate a virtual environment**
+2. **Navigate to project directory and activate the virtual environment**
    ```bash
-   # Create virtual environment
-   python -m venv venv
+   # Change to project directory
+   cd ai_agent
 
-   # Activate virtual environment
+   # Activate virtual environment (already created in ai_agent/venv)
    # On macOS/Linux:
    source venv/bin/activate
    # On Windows:
@@ -46,7 +46,7 @@ An AI-powered assistant for processing and assessing boat insurance claims using
 
 1. **Start the FastAPI server**
    ```bash
-   cd ai_agent
+   # Make sure you're in the ai_agent directory with the virtual environment activated
    uvicorn app:app --reload
    ```
 
