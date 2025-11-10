@@ -37,15 +37,44 @@ An AI-powered assistant for processing and assessing boat insurance claims using
 
 4. **Set up environment variables**
    ```bash
-   # Create .env file
+   # On macOS/Linux:
    touch .env
 
-   # Add your environment variables to .env file:
+   # On Windows (using Command Prompt):
+   type nul > .env
+
+   # On Windows (using PowerShell):
+   New-Item -Path ".env" -ItemType "file"
+
+   # Add the following variables to your .env file:
    # OPENAI_API_KEY=your_api_key_here
    # PORT=8000 (optional, defaults to 8000)
+   # POLICY_SERVICE_URL=http://localhost:8080 (Spring Boot service URL)
    ```
 
 ## Running the Application
+
+### Policy Service (Spring Boot)
+
+1. **Prerequisites**
+   - Java 17 or higher
+   - Maven 3.8+ or higher
+
+2. **Start the Policy Service**
+   ```bash
+   # Navigate to policy-service directory
+   cd policy-service
+
+   # Build the service
+   mvn clean install
+
+   # Run the service
+   mvn spring-boot:run
+   ```
+
+   The Policy Service will start on http://localhost:8080
+
+### Claims Assistant Service (FastAPI)
 
 1. **Start the FastAPI server**
    ```bash
@@ -53,26 +82,54 @@ An AI-powered assistant for processing and assessing boat insurance claims using
    uvicorn app:app --reload
    ```
 
-2. **Access the application**
-   - The API will be available at: http://127.0.0.1:8000
-   - API documentation (Swagger UI) will be at: http://127.0.0.1:8000/docs
+2. **Access the services**
+   
+   Claims Assistant Service (FastAPI):
+   - Main API: http://127.0.0.1:8000
+   - API documentation (Swagger UI): http://127.0.0.1:8000/docs
    - Alternative API documentation (ReDoc): http://127.0.0.1:8000/redoc
+
+   Policy Service (Spring Boot):
+   - Main API: http://localhost:8080
+   - API documentation (Swagger UI): http://localhost:8080/swagger-ui.html
+   - Alternative API documentation: http://localhost:8080/v3/api-docs
 
 ## API Endpoints
 
-### POST `/assess`
+### Claims Assistant Service (FastAPI)
+
+#### POST `/assess`
 Submit a claim for assessment.
 - Accepts claim text and optional images
 - Returns assessment results
 
-### GET `/`
+#### GET `/`
 Health check endpoint that returns basic API information.
+
+### Policy Service (Spring Boot)
+
+#### GET `/api/v1/policies`
+Retrieve all available insurance policies.
+
+#### GET `/api/v1/policies/{id}`
+Retrieve a specific policy by ID.
+
+#### POST `/api/v1/policies/validate`
+Validate a claim against policy terms and conditions.
+- Accepts claim details and policy ID
+- Returns validation results
 
 ## Development
 
-- The main application code is in `ai_agent/app.py`
-- LangGraph workflow is defined in `ai_agent/graph/workflow.py`
-- Environment variables are loaded from `.env` file
+### Claims Assistant Service
+- Main application code: `ai_agent/app.py`
+- LangGraph workflow: `ai_agent/graph/workflow.py`
+- Environment variables: `.env` file
+
+### Policy Service
+- Main application code: `policy-service/src/main/java/com/claims/policy/`
+- Configuration: `policy-service/src/main/resources/application.properties`
+- Database migrations: `policy-service/src/main/resources/db/migration/`
 
 ## Contributing
 
