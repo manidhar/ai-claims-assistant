@@ -15,12 +15,15 @@ An AI-powered assistant for processing and assessing boat insurance claims using
    cd ai-claims-assistant
    ```
 
-2. **Navigate to project directory and activate the virtual environment**
+2. **Navigate to project directory, create and activate the virtual environment**
    ```bash
    # Change to project directory
    cd ai_agent
 
-   # Activate virtual environment (already created in ai_agent/venv)
+   # Create virtual environment
+   python -m venv venv
+
+   # Activate virtual environment
    # On macOS/Linux:
    source venv/bin/activate
    # On Windows:
