@@ -61,7 +61,7 @@ An AI-powered assistant for processing and assessing boat insurance claims using
 
 1. **Prerequisites**
    - Java 17 or higher
-   - Maven 3.8+ or higher
+   - Gradle 8.0+ or higher
 
 2. **Start the Policy Service**
    ```bash
@@ -69,10 +69,10 @@ An AI-powered assistant for processing and assessing boat insurance claims using
    cd policy-service
 
    # Build the service
-   mvn clean install
+   ./gradlew clean build
 
    # Run the service
-   mvn spring-boot:run
+   ./gradlew bootRun
    ```
 
    The Policy Service will start on http://localhost:8080
@@ -270,6 +270,7 @@ def get_policies():
 - Main application code: `policy-service/src/main/java/com/claims/policy/`
 - Configuration: `policy-service/src/main/resources/application.properties`
 - Database migrations: `policy-service/src/main/resources/db/migration/`
+- Build configuration: `policy-service/build.gradle`
 
 ## Contributing
 
